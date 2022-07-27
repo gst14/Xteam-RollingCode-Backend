@@ -1,24 +1,28 @@
 const express = require("express");
-const gamesApp = express();
+const app = express();
 
 const cors = require("cors");
 const morgan = require("morgan");
 
 require("dotenv/config");
 const gamesRoutes = require("../routes/gamesRoutes");
+const userRoutes = require("../routes/userRoutes");
 require("../database/dbConnection");
 
-const portGames = process.env.PORT;
+const BASE_URL = process.env.BASE_URL || "localhost";
+const APP_PORT = process.env.PORT || 8080;
 
-gamesApp.use(cors());
-gamesApp.use(morgan("dev"));
-gamesApp.use(express.json());
+app.use(cors());
+app.use(morgan("dev"));
+app.use(express.json());
 
-gamesApp.get("/", (req, res) => {
+app.get("/", (req, res) => {
   res.json({ msg: "Welcome to root" });
 });
-gamesApp.use("/games", gamesRoutes);
+app.use("/games", gamesRoutes);
+app.use("/users", userRoutes);
 
-gamesApp.listen(portGames, () => {
-  console.log("Estamos escuchando el puerto:", portGames);
+app.listen(APP_PORT, () => {
+  let msg = `The server is online -> ${BASE_URL}:${APP_PORT}`;
+  console.log(msg);
 });
