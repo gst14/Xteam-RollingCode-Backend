@@ -3,7 +3,7 @@ const { Schema, model } = require("mongoose");
 const gamesSchema = new Schema({
   image: {
     type: Array,
-    required: true,
+    required: false,
   },
   title: {
     type: String,
@@ -14,9 +14,9 @@ const gamesSchema = new Schema({
     required: true,
   },
   price: Number,
-  prominent: {
+  fav: {
     type: Boolean,
-    required: true,
+    required: false,
   },
 });
 module.exports = model("Games", gamesSchema);

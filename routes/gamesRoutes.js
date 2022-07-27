@@ -4,7 +4,7 @@ const {
   sendGame,
   deleteGame,
   updateGame,
-} = require("../controller/gamesController");
+} = require("../controllers/gamesController");
 const gamesRoutes = Router();
 
 gamesRoutes.get("/", getGame);

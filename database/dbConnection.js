@@ -4,9 +4,10 @@ require("dotenv/config");
 const connectionDB = async () => {
   try {
     await mongoose.connect(process.env.DB_URL_CONNECTION_GAMES);
-    console.log("Te conectaste con exito a la base de datos de Games");
+    console.log("DB connection has been succesfully");
   } catch (error) {
-    console.log("Algo salio mal, revise la conexion", error);
+    console.log("Something went wrong, check your connection");
+    console.log(error);
   }
 };
 connectionDB();
