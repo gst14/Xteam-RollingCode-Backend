@@ -14,6 +14,7 @@ const getUsers = async (req, res) => {
 
 const loginUser = async (req, res) => {
   const { email, password } = req.body;
+  const SECRET_KEY = process.env.SECRET_KEY_PROD || process.env.SECRET_KEY
   const userFounded = await Users.findOne({ email });
   if (userFounded) {
     const match = bcrypt.compareSync(password, userFounded.password);
@@ -22,7 +23,7 @@ const loginUser = async (req, res) => {
         id: userFounded._id,
         email: userFounded.email,
       };
-      const token = jwt.sign(payload, process.env.SECRET_KEY, {
+      const token = jwt.sign(payload, SECRET_KEY, {
         expiresIn: "10h",
       });
       res.status(200).json({ msg: "Login success", token, ...payload });
