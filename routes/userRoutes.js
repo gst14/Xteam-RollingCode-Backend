@@ -11,7 +11,7 @@ const userRoutes = Router();
 
 userRoutes.get("/", jwtValidator, getUsers);
 
-userRoutes.get("/login", loginUser);
+userRoutes.post("/login", loginUser);
 
 userRoutes.post("/", createUser);
 

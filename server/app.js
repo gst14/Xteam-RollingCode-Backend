@@ -9,7 +9,7 @@ const gamesRoutes = require("../routes/gamesRoutes");
 const userRoutes = require("../routes/userRoutes");
 require("../database/dbConnection");
 
-const BASE_URL = process.env.BASE_URL_PROD || process.env.BASE_URL_PROD || 'localhost';
+const BASE_URL = process.env.BASE_URL_PROD || process.env.BASE_URL || 'localhost';
 const APP_PORT = process.env.PORT_PROD || process.env.PORT || 8080;
 
 app.use(cors());
