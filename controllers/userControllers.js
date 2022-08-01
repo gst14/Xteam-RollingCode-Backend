@@ -14,7 +14,7 @@ const getUsers = async (req, res) => {
 
 const loginUser = async (req, res) => {
   const { email, password } = req.body;
-  const SECRET_KEY = process.env.SECRET_KEY_PROD || process.env.SECRET_KEY
+  const SECRET_KEY = process.env.SECRET_KEY_PROD || process.env.SECRET_KEY;
   const userFounded = await Users.findOne({ email });
   if (userFounded) {
     const match = bcrypt.compareSync(password, userFounded.password);
@@ -37,10 +37,15 @@ const loginUser = async (req, res) => {
 
 const createUser = async (req, res) => {
   const SALT_ROUNDS = 10;
-  const { fullname, email, password } = req.body;
+  const { fullname, email, password, profile } = req.body;
   try {
     let passwordEncrypted = await bcrypt.hash(password, SALT_ROUNDS);
-    const newUser = new Users({ fullname, email, password: passwordEncrypted });
+    const newUser = new Users({
+      fullname,
+      email,
+      password: passwordEncrypted,
+      profile,
+    });
     console.log(passwordEncrypted);
     const userGenerated = await newUser.save();
     res.send({ created: true, ...userGenerated._doc });

@@ -15,6 +15,11 @@ const userSchema = new Schema({
   },
   banned: {
     type: Boolean
-  }
+  },
+  profile: {
+    type: String,
+    required: true,
+  },
+  
 });
 module.exports = model("Users", userSchema);

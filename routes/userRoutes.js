@@ -9,14 +9,11 @@ const {
 const { jwtValidator } = require("../middlewares/jwtValidator");
 const userRoutes = Router();
 
-userRoutes.get("/", jwtValidator, getUsers);
-
-userRoutes.post("/login", loginUser);
-
-userRoutes.post("/", createUser);
-
-userRoutes.delete("/:id", jwtValidator, banUser);
-
-userRoutes.put("/:id", jwtValidator, modifyUser);
+userRoutes
+  .get("/", jwtValidator, getUsers)
+  .post("/login", loginUser)
+  .post("/", createUser)
+  .delete("/:id", jwtValidator, banUser)
+  .put("/:id", jwtValidator, modifyUser)
 
 module.exports = userRoutes;
