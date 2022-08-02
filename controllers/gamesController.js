@@ -55,4 +55,20 @@ const updateGame = async (req, res) => {
   }
 };
 
-module.exports = { getGame, sendGame, deleteGame, updateGame };
+const getById = async(req,res)=>{
+  const {id} = req.body
+  const getId = await Games.findById(id)
+  if(getId !== null){
+   res.status(200).json(getId)
+  }else{
+   res.status(404).json('Algo salio mal y no se puso realizar la busqueda por ID')
+  }
+ };
+
+const sendFav = async(req,res)=>{
+const {idGame,idUser} = req.params
+res.json({game : idGame , user : idUser})
+}
+
+
+module.exports = { getGame, sendGame, deleteGame, updateGame, sendFav,getById };

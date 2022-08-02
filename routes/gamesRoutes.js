@@ -4,15 +4,25 @@ const {
   sendGame,
   deleteGame,
   updateGame,
+  sendFav, 
+  getById
 } = require("../controllers/gamesController");
+
+const { jwtValidator } = require("../middlewares/jwtValidator");
+
 const gamesRoutes = Router();
 
-gamesRoutes.get("/", getGame);
+gamesRoutes
+            .get("/", getGame)
 
-gamesRoutes.post("/", sendGame);
+            .post("/",jwtValidator, sendGame)
 
-gamesRoutes.delete("/:id", deleteGame);
+            .delete("/:id",jwtValidator, deleteGame)
 
-gamesRoutes.put("/:id", updateGame);
+            .put("/:id",jwtValidator, updateGame)
+
+            .post("/fav/:idGame/:idUser" , jwtValidator, sendFav)
+
+            .get("/:id",getById)
 
 module.exports = gamesRoutes;
