@@ -12,6 +12,20 @@ const getUsers = async (req, res) => {
   }
 };
 
+const getUserById = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const user = await Users.findById(id);
+    if (user) {
+      res.json(user)
+    }else{
+      res.status(404).json({ msg: "An error has been raised", error });
+    }
+  } catch (error) {
+    res.status(404).json({ msg: "An error has been raised", error });
+  }
+};
+
 const loginUser = async (req, res) => {
   const { email, password } = req.body;
   const SECRET_KEY = process.env.SECRET_KEY_PROD || process.env.SECRET_KEY;
@@ -54,12 +68,43 @@ const createUser = async (req, res) => {
   }
 };
 
-const banUser = async (req, res) => {
-  res.send({ msg: "Delete user" });
-};
-
 const modifyUser = async (req, res) => {
-  res.send({ msg: "Modifying user" });
+  try {
+    const { id } = req.params;
+    const userFounded = await Users.findByIdAndUpdate(id, {...req.body})
+    if(userFounded){
+      res
+      .json({msg: "The user has been modified", modified: true});
+    }else{
+      res
+      .status(404)
+      .json({ msg: "An error has been raised", error });
+    }
+    res.send({ msg: "Modifying user" });
+  } catch (error) {
+    res
+      .status(404)
+      .json({ msg: "An error has been raised", error });
+  }
+};
+const deleteUser = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const userFounded = await Users.findByIdAndDelete(id)
+    if(userFounded){
+      res
+      .json({msg: "The user has been deleted", deleted: true});
+    }else{
+      res
+      .status(404)
+      .json({ msg: "An error has been raised", error });
+    }
+    res.send({ msg: "Modifying user" });
+  } catch (error) {
+    res
+      .status(404)
+      .json({ msg: "An error has been raised", error });
+  }
 };
 
-module.exports = { getUsers, createUser, banUser, modifyUser, loginUser };
+module.exports = { getUsers, createUser, getUserById, modifyUser, loginUser,deleteUser };
