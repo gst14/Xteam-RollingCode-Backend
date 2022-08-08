@@ -6,7 +6,7 @@ const {
 
 const salesRoute = Router()
 
-salesRoute.get('/',getSales);
-salesRoute.post('/',postSales);
+salesRoute.get('/', jwtValidator, getSales);
+salesRoute.post('/', jwtValidator, postSales);
 
 module.exports = salesRoute
