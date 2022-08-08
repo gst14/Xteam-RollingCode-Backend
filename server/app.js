@@ -8,6 +8,7 @@ require("dotenv/config");
 const gamesRoutes = require("../routes/gamesRoutes");
 const userRoutes = require("../routes/userRoutes");
 const salesRoutes = require("../routes/salesRoutes")
+const commentsRoutes = require("../routes/commentsRoutes")
 require("../database/dbConnection");
 
 const BASE_URL = process.env.BASE_URL_PROD || process.env.BASE_URL || 'localhost';
@@ -23,6 +24,7 @@ app.get("/", (req, res) => {
 app.use("/games", gamesRoutes);
 app.use("/users", userRoutes);
 app.use("/sales",salesRoutes)
+app.use("/comments",commentsRoutes)
 
 app.listen(APP_PORT, () => {
   let msg = `The server is online -> ${BASE_URL}:${APP_PORT}`;
