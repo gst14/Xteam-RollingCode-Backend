@@ -12,7 +12,7 @@ const categoryRoute = Router()
 
 categoryRoute.get('/', getCategory)
              .post('/', jwtValidator, postCategory)
-             .delete('/',  deleteCategory)
-             .put('/', modifyCategory)
+             .delete('/:id',  deleteCategory)
+             .put('/:id', modifyCategory)
 
 module.exports= categoryRoute

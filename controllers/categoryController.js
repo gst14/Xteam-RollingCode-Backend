@@ -1,4 +1,5 @@
 const Category = require('../models/categoryModel')
+const Game = require('../models/gamesModels')
  
 const getCategory= async(req,res)=>{
 try{
@@ -33,11 +34,26 @@ const postCategory = async(req,res)=>{
 }
 
 const deleteCategory = async(req,res)=>{
-   
+   const {id} = req.params
+   const item = await Category.findById(id)
+   const deleteGame = await Game.deleteMany({_id:{$in:item.item_game}}) 
+   const deleteAll = await Category.deleteOne({_id : id})
+   console.log(deleteGame,deleteAll)
+   res.status(201).json(' delete sucessfull')
 }
 
 const modifyCategory = async(req,res)=>{
-    
+const {id}= req.params
+const {type, item_game}= req.body
+const getIdModify = await Category.findByIdAndUpdate(id,{
+    type,
+    item_game
+})
+if(getIdModify !== null){
+res.status(200).json({msg: 'se modifico con exito la categoria',getIdModify})
+}else{
+  res.status(404).json({msg:'error al modificar la categoria'})  
+} 
 }
 
 module.exports = {getCategory , postCategory, deleteCategory,modifyCategory}
