@@ -15,10 +15,6 @@ pay : {
     type: String,
  required: true
 },
-price :{
-    type: Number,
-   required: true
-},
 total :{
     type: Number,
     required: true
