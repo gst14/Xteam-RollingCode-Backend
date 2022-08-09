@@ -12,7 +12,7 @@ const commentsRoutes = require("../routes/commentsRoutes")
 require("../database/dbConnection");
 
 const BASE_URL = process.env.BASE_URL_PROD || process.env.BASE_URL || 'localhost';
-const APP_PORT = process.env.PORT_PROD || process.env.PORT || 8080;
+const APP_PORT = process.env.PORT || 8080;
 
 app.use(cors());
 app.use(morgan("dev"));

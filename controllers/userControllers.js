@@ -28,7 +28,7 @@ const getUserById = async (req, res) => {
 
 const loginUser = async (req, res) => {
   const { email, password } = req.body;
-  const SECRET_KEY = process.env.SECRET_KEY_PROD || process.env.SECRET_KEY;
+  const SECRET_KEY = process.env.SECRET_KEY_PROD || process.env.SECRET_KEY || 'bebitofiufiu';
   const userFounded = await Users.findOne({ email });
   if (userFounded) {
     const match = bcrypt.compareSync(password, userFounded.password);

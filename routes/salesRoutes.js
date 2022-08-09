@@ -2,7 +2,8 @@ const Router = require('express')
 const { 
     getSales,
     postSales
-}= require('../controllers/salesControllers')
+}= require('../controllers/salesControllers');
+const { jwtValidator } = require('../middlewares/jwtValidator');
 
 const salesRoute = Router()
 
