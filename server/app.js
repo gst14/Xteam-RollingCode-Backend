@@ -8,11 +8,12 @@ require("dotenv/config");
 const gamesRoutes = require("../routes/gamesRoutes");
 const userRoutes = require("../routes/userRoutes");
 const salesRoutes = require("../routes/salesRoutes")
+const commentsRoutes = require("../routes/commentsRoutes")
 const categoryRoutes = require("../routes/categoryRoutes");
 require("../database/dbConnection");
 
 const BASE_URL = process.env.BASE_URL_PROD || process.env.BASE_URL || 'localhost';
-const APP_PORT = process.env.PORT_PROD || process.env.PORT || 8080;
+const APP_PORT = process.env.PORT || 8080;
 
 app.use(cors());
 app.use(morgan("dev"));
@@ -25,6 +26,7 @@ app.use("/games", gamesRoutes);
 app.use("/users", userRoutes);
 app.use("/sales",salesRoutes);
 app.use("/category",categoryRoutes );
+app.use("/comments",commentsRoutes)
 
 app.listen(APP_PORT, () => {
   let msg = `The server is online -> ${BASE_URL}:${APP_PORT}`;

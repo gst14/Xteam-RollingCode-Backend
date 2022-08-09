@@ -11,6 +11,9 @@
   "name": "backend-games",
   "version": "1.0.0",
   "main": "./server/app.js",
+  "engines": {
+    "node": "12.11.1"
+  },
   "scripts": {
     "start": "node server/app.js",
     "dev": "nodemon server/app.js",
