@@ -30,9 +30,9 @@ const deleteGame = async (req, res) => {
   const { id } = req.params;
   const getById = await Games.findByIdAndDelete(id);
   if (getById !== null) {
-    res.status(200).json("Se elimino el juego");
+    res.status(200).json({msg: "The game has been deleted", deleted: true});
   } else {
-    res.status(404).json("Algo salio mal y no se pudo eliminar el juego");
+    res.status(404).json({ msg: "An error has been raised", error });
   }
 };
 
@@ -47,12 +47,30 @@ const updateGame = async (req, res) => {
     fav,
   });
   if (getIdUpdate !== null) {
-    res.status(200).json("Se modifico el juego con exito");
+    res.status(200).json({msg: "The game has been modified", modified: true});
   } else {
     res
       .status(404)
-      .json("Algo salio mal y no se pudo realizar la modificacion del juego");
+      .json({ msg: "An error has been raised", error });
   }
 };
 
-module.exports = { getGame, sendGame, deleteGame, updateGame };
+const getById = async (req, res) => {
+  const { id } = req.params;
+  const getId = await Games.findById(id);
+  if (getId !== null) {
+    res.status(200).json(getId);
+  } else {
+    res
+      .status(404)
+      .json({ msg: "An error has been raised", error });
+  }
+};
+
+const sendFav = async(req,res)=>{
+const {idGame,idUser} = req.params
+res.json({game : idGame , user : idUser})
+}
+
+
+module.exports = { getGame, sendGame, deleteGame, updateGame, sendFav,getById };
