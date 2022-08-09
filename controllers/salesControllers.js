@@ -22,14 +22,13 @@ const getSales = async(req,res)=>{
 
 const postSales = async(req,res)=>{
     console.log(req.body)
-const {user,item,pay,price,total,date_time}=req.body;
+const {user,item,pay,total,date_time}=req.body;
 
 try{
     const sale = new Sales({
         user,
         item,
         pay,
-        price,
         total,
         date_time
     });
