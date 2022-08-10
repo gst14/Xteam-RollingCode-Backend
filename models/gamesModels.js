@@ -18,5 +18,10 @@ const gamesSchema = new Schema({
     type: Boolean,
     required: false,
   },
+  category:{
+    type:Schema.ObjectId,
+    ref:'Category',
+    required : true
+  }
 });
 module.exports = model("Games", gamesSchema);
