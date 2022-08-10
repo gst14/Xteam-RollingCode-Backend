@@ -6,12 +6,11 @@ const{
      modifyCategory
 } = require('../controllers/categoryController')
 
-const { jwtValidator } = require("../middlewares/jwtValidator")
 
 const categoryRoute = Router()
 
 categoryRoute.get('/', getCategory)
-             .post('/', jwtValidator, postCategory)
+             .post('/',postCategory)
              .delete('/:id',  deleteCategory)
              .put('/:id', modifyCategory)
 
