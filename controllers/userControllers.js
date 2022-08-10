@@ -51,14 +51,14 @@ const loginUser = async (req, res) => {
 
 const createUser = async (req, res) => {
   const SALT_ROUNDS = 10;
-  const { fullname, email, password, profile } = req.body;
+  const { fullname, email, password, admin } = req.body;
   try {
     let passwordEncrypted = await bcrypt.hash(password, SALT_ROUNDS);
     const newUser = new Users({
       fullname,
       email,
       password: passwordEncrypted,
-      profile,
+      admin,
     });
     console.log(passwordEncrypted);
     const userGenerated = await newUser.save();
