@@ -80,7 +80,6 @@ const modifyUser = async (req, res) => {
       .status(404)
       .json({ msg: "An error has been raised", error });
     }
-    res.send({ msg: "Modifying user" });
   } catch (error) {
     res
       .status(404)
