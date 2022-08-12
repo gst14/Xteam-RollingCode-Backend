@@ -75,7 +75,7 @@ const getById = async (req, res) => {
   } else {
     res
       .status(404)
-      .json({ msg: "An error has been raised", error });
+      .json({ msg: "An error has been raised" });
   }
 };
 
