@@ -2,15 +2,25 @@ const Games = require("../models/gamesModels");
 
 const getGame = async (req, res) => {
   try {
-    const games = await Games.find({});
-    res.status(201).json(games);
+     await Games.find({})
+    .populate({path:'category', model: 'Category'})
+    .exec((er,games)=>{
+      if(er){
+        console.log(err);
+        process.exit(-1);
+      }else{
+        console.log(games)
+        res.status(201).json({msg: 'exito',games})
+      }
+    })
+  
   } catch (error) {
     res.status(404).json(error);
   }
 };
 
 const sendGame = async (req, res) => {
-  const { image, title, details, price, fav } = req.body;
+  const { image, title, details, price, fav,category } = req.body;
   try {
     const game = new Games({
       image,
@@ -18,6 +28,7 @@ const sendGame = async (req, res) => {
       details,
       price,
       fav,
+      category
     });
     const newGame = await game.save();
     res.status(201).json(newGame);
@@ -38,13 +49,14 @@ const deleteGame = async (req, res) => {
 
 const updateGame = async (req, res) => {
   const { id } = req.params;
-  const { image, title, details, price, prominent } = req.body;
+  const { image, title, details, price, fav, category} = req.body;
   const getIdUpdate = await Games.findByIdAndUpdate(id, {
     image,
     title,
     details,
     price,
     fav,
+    category
   });
   if (getIdUpdate !== null) {
     res.status(200).json({msg: "The game has been modified", modified: true});
@@ -63,7 +75,7 @@ const getById = async (req, res) => {
   } else {
     res
       .status(404)
-      .json({ msg: "An error has been raised", error });
+      .json({ msg: "An error has been raised" });
   }
 };
 
