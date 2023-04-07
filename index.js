@@ -5,12 +5,12 @@ const cors = require("cors");
 const morgan = require("morgan");
 
 require("dotenv/config");
-const gamesRoutes = require("../routes/gamesRoutes");
-const userRoutes = require("../routes/userRoutes");
-const salesRoutes = require("../routes/salesRoutes")
-const commentsRoutes = require("../routes/commentsRoutes")
-const categoryRoutes = require("../routes/categoryRoutes");
-require("../database/dbConnection");
+const gamesRoutes = require("./routes/gamesRoutes");
+const userRoutes = require("./routes/userRoutes");
+const salesRoutes = require("./routes/salesRoutes")
+const commentsRoutes = require("./routes/commentsRoutes")
+const categoryRoutes = require("./routes/categoryRoutes");
+require("./database/dbConnection");
 
 const BASE_URL = process.env.BASE_URL_PROD || process.env.BASE_URL || 'localhost';
 const APP_PORT = process.env.PORT || 8080;
