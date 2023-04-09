@@ -107,4 +107,23 @@ const deleteUser = async (req, res) => {
   }
 };
 
-module.exports = { getUsers, createUser, getUserById, modifyUser, loginUser,deleteUser };
+const resetPasswordByEmail = async (req, res) => {
+  try {
+    const { email, newPassword } = req.body;
+    const user = await Users.findOne({ email });
+    if (user) {
+      const SALT_ROUNDS = 10;
+      let passwordEncrypted = await bcrypt.hash(newPassword, SALT_ROUNDS);
+      user.password = passwordEncrypted;
+      await user.save();
+      res.status(200).json({ msg: "Password reset success", passwordEncrypted });
+    } else {
+      res.status(404).json({ msg: "No user match" });
+    }
+  } catch (error) {
+    res.status(404).json({ msg: "An error has been raised", error });
+  }
+};
+
+
+module.exports = { getUsers, createUser, getUserById, modifyUser, loginUser,deleteUser, resetPasswordByEmail };

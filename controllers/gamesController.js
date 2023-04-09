@@ -10,7 +10,7 @@ const getGame = async (req, res) => {
         process.exit(-1);
       }else{
         console.log(games)
-        res.status(201).json({msg: 'exito',games})
+        res.status(200 ).json({msg: 'exito',games})
       }
     })
   
